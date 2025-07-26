@@ -43,8 +43,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="more"
         options={{
-          title: '더보기',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="ellipsis.circle.fill" color={color} />,
+          title: '마이페이지',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
         }}
       />
     </Tabs>
