@@ -9,6 +9,10 @@ import LandingPage from "./pages/auth/LandingPage"
 import DiseasePage from "./pages/auth/DiseasePage"
 import PostPage from "./pages/community/PostPage"
 
+import NewsDetail from "./pages/home/NewsDetail"
+import DiseaseInformationDetail from "./pages/home/DiseaseInformationDetail"
+import BenefitDetail from "./pages/home/BenefitDetail"
+
 export default function Router() {
   return (
     <BrowserRouter>
@@ -22,6 +26,9 @@ export default function Router() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/signup/disease" element={<DiseasePage />} />
+        <Route path="/news/:id" element={<NewsDetail />} />
+        <Route path="/disease/:id" element={<DiseaseInformationDetail />} />
+        <Route path="/benefit/:id" element={<BenefitDetail />} />
       </Routes>
     </BrowserRouter>
   )
