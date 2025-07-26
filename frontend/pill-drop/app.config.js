@@ -1,4 +1,4 @@
-{
+export default {
   "expo": {
     "name": "pill-drop",
     "slug": "pill-drop",
@@ -37,6 +37,9 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "naverMapClientId": process.env.NAVER_MAP_CLIENT_ID || "your_client_id_here"
     }
   }
-}
+};

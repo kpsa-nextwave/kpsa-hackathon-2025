@@ -58,6 +58,76 @@ export default function KakaoMapScreen() {
     </html>
   `;
 
+  // 네이버 지도 웹 버전 HTML
+  const naverMapHTML = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <title>폐의약품 수거함 위치</title>
+        <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${Constants.expoConfig?.extra?.naverMapClientId || 'your_client_id'}"></script>
+        <style>
+            body { margin: 0; padding: 0; }
+            #map { width: 100%; height: 100vh; }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+        <script>
+            var map = new naver.maps.Map('map', {
+                center: new naver.maps.LatLng(37.5666805, 126.9784147),
+                zoom: 15
+            });
+
+            // 폐의약품 수거함 마커들
+            var locations = [
+                {
+                    position: new naver.maps.LatLng(37.5676805, 126.9774147),
+                    title: '서울대학교병원',
+                    content: '<div style="padding:10px;"><b>서울대학교병원</b><br/>폐의약품 수거함<br/>0.5km</div>'
+                },
+                {
+                    position: new naver.maps.LatLng(37.5656805, 126.9794147),
+                    title: '종로구 보건소',
+                    content: '<div style="padding:10px;"><b>종로구 보건소</b><br/>폐의약품 수거함<br/>1.2km</div>'
+                },
+                {
+                    position: new naver.maps.LatLng(37.5646805, 126.9804147),
+                    title: '마이약국',
+                    content: '<div style="padding:10px;"><b>마이약국</b><br/>폐의약품 수거함<br/>1.8km</div>'
+                }
+            ];
+
+            locations.forEach(function(location, index) {
+                var marker = new naver.maps.Marker({
+                    position: location.position,
+                    map: map,
+                    title: location.title,
+                    icon: {
+                        content: '<div style="background-color: #007AFF; color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold;">💊</div>',
+                        size: new naver.maps.Size(40, 40),
+                        anchor: new naver.maps.Point(20, 40)
+                    }
+                });
+
+                var infoWindow = new naver.maps.InfoWindow({
+                    content: location.content
+                });
+
+                naver.maps.Event.addListener(marker, 'click', function() {
+                    if (infoWindow.getMap()) {
+                        infoWindow.close();
+                    } else {
+                        infoWindow.open(map, marker);
+                    }
+                });
+            });
+        </script>
+    </body>
+    </html>
+  `;
+
   return (
     <View style={{ flex: 1 }}>
       {/* 지도 WebView */}
