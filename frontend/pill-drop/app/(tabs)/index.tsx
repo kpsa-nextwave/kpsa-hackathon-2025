@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
-import { Pressable, StyleSheet } from 'react-native';
+import { Pressable, ScrollView, StyleSheet } from 'react-native';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -24,8 +24,7 @@ export default function HomeScreen() {
             <ThemedText style={styles.appName}>버려요약</ThemedText>
           </ThemedView>
           <ThemedView style={styles.pointSection}>
-            <ThemedText style={styles.pointLabel}>내 포인트</ThemedText>
-            <ThemedText style={styles.pointValue}>1,250P</ThemedText>
+            <ThemedText style={styles.pointValue}>P 1,250</ThemedText>
           </ThemedView>
         </ThemedView>
       }>
@@ -37,12 +36,57 @@ export default function HomeScreen() {
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">약템프를 찍어보자</ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">건강하게 버리고, 똑똑하게 쓰는 법</ThemedText>
-        <ThemedText>
-          <ThemedText type="defaultSemiBold">생분해 비닐 사용 시 환경오염 5% 감소 효과!</ThemedText>
+        <ThemedText style={styles.stampProgress}>
+          인증은 하루 한 번만 참여 할 수 있어요.
         </ThemedText>
+        <ThemedView style={styles.stampGrid}>
+          {Array.from({ length: 10 }, (_, index) => (
+            <ThemedView key={index} style={styles.stampSlot}>
+              <ThemedText style={styles.stampNumber}>{index + 1}</ThemedText>
+              {index < 3 && (
+                <ThemedText style={styles.stampIcon}>✓</ThemedText>
+              )}
+            </ThemedView>
+          ))}
+          <Pressable style={styles.certificationButton}>
+            <ThemedText style={styles.certificationButtonText}>폐의약품 수거함 인증</ThemedText>
+          </Pressable>
+        </ThemedView>
+      </ThemedView>
+      <ThemedView style={styles.lastStepContainer}>
+        <ThemedView style={styles.lastStepTitle}>
+          <ThemedText type="subtitle">건강하게 버리고, 똑똑하게 쓰는 법</ThemedText>
+        </ThemedView>
+        
+        <ScrollView 
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          style={styles.horizontalScroll}
+          contentContainerStyle={styles.scrollContent}
+        >
+          <ThemedView style={styles.tipItem}>
+            <ThemedText type="defaultSemiBold" style={styles.tipNumber}>04</ThemedText>
+            <ThemedText type="defaultSemiBold" style={styles.tipText}>
+              생분해 비닐 사용 시 환경오염 5% 감소 효과!
+            </ThemedText>
+          </ThemedView>
+          <ThemedView style={styles.tipItem}>
+            <ThemedText type="defaultSemiBold" style={styles.tipNumber}>05</ThemedText>
+            <ThemedText type="defaultSemiBold" style={styles.tipText}>
+              폐의약품 안전 처리로 토양 오염 방지!
+            </ThemedText>
+          </ThemedView>
+          <ThemedView style={styles.tipItem}>
+            <ThemedText type="defaultSemiBold" style={styles.tipText}>
+              재활용 포장재 사용으로 탄소 발자국 감소!
+            </ThemedText>
+          </ThemedView>
+          <ThemedView style={styles.tipItem}>
+            <ThemedText type="defaultSemiBold" style={styles.tipText}>
+              올바른 의약품 분리배출로 수질 보호!
+            </ThemedText>
+          </ThemedView>
+        </ScrollView>
       </ThemedView>
     </ParallaxScrollView>
   );
@@ -74,17 +118,22 @@ const styles = StyleSheet.create({
     color: '#2c3e50',
   },
   pointSection: {
-    alignItems: 'flex-end',
-  },
-  pointLabel: {
-    fontSize: 12,
-    color: '#5a6c7d',
-    marginBottom: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 78,
+    height: 32,
+    flexShrink: 0,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: 'rgba(107, 107, 107, 1)',
   },
   pointValue: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#2c3e50',
+    color: 'rgba(255, 255, 255, 1)',
+    textAlign: 'center',
+    fontSize: 12,
+    fontWeight: '600',
   },
   titleContainer: {
     flexDirection: 'row',
@@ -92,8 +141,23 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   stepContainer: {
+    backgroundColor: '#eeeeee',
     gap: 8,
-    marginBottom: 8,
+    marginBottom: -16,
+    marginHorizontal: -32,
+    paddingHorizontal: 32,
+    paddingVertical: 16,
+  },
+  lastStepContainer: {
+    backgroundColor: '#eeeeee',
+    gap: 8,
+    marginBottom: -16,
+    marginHorizontal: -32,
+    paddingVertical: 16,
+  },
+  lastStepTitle: {
+    paddingHorizontal: 32,
+    backgroundColor: '#eeeeee',
   },
   locationButton: {
     backgroundColor: '#007AFF',
@@ -105,6 +169,87 @@ const styles = StyleSheet.create({
   locationButtonText: {
     color: 'white',
     fontWeight: '600',
+  },
+  certificationButton: {
+    backgroundColor: '#35C8BA',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 8,
+    marginHorizontal: '5%',
+    width: '90%',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  certificationButtonText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  horizontalScroll: {
+    height: 150,
+  },
+  scrollContent: {
+    alignItems: 'center',
+    paddingHorizontal: 32,
+  },
+  tipItem: {
+    backgroundColor: '#7d7d7d',
+    paddingHorizontal: 16,
+    paddingVertical: 20,
+    marginHorizontal: 8,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#7d7d7d',
+    minWidth: 160,
+    minHeight: 150,
+    justifyContent: 'flex-end',
+  },
+  tipNumber: {
+    fontSize: 16,
+    color: '#35C8BA',
+    textAlign: 'left',
+  },
+  tipText: {
+    fontSize: 17,
+    color: '#fff',
+    textAlign: 'left',
+    maxWidth: 200,
+  },
+  stampGrid: {
+    padding: 16,
+    borderRadius: 8,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    gap: 8,
+  },
+  stampSlot: {
+    width: 48,
+    height: 48,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#e0e0e0',
+    backgroundColor: '#f8f8f8',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  stampNumber: {
+    fontSize: 12,
+    color: '#666',
+    fontWeight: '500',
+  },
+  stampIcon: {
+    fontSize: 24,
+    color: '#4CAF50',
+    fontWeight: 'bold',
+    position: 'absolute',
+  },
+  stampProgress: {
+    fontSize: 14,
+    color: '#666',
+    textAlign: 'left',
+    marginTop: 8,
   },
   reactLogo: {
     height: 178,
