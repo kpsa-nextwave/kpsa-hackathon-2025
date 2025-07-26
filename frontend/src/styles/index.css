@@ -1,3 +1,119 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* === CSS 변수 === */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --color-main: #0064E0;
+  --color-hover: #0160D5;
+  --color-primary: #75757A;
+  --color-secondary: #B5B5B7;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/PretendardVariable.woff2') format('woff2-variations');
+  font-weight: 1 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  @apply bg-[var(--background)] text-[var(--foreground)] font-pretendard;
+}
+
+/* === Custom Components === */
+@layer components {
+  .btn {
+    @apply font-pretendard text-[16px];
+  }
+
+  .btn-primary {
+    @apply bg-main text-white hover:bg-hover;
+  }
+
+  .btn-outline {
+    @apply text-main hover:text-hover hover:bg-gray-100;
+  }
+}
+
+/* === Custom Utilities === */
+@layer utilities {
+  /* 색상 유틸 */
+  .text-main {
+    color: var(--color-main);
+  }
+  .text-hover {
+    color: var(--color-hover);
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  .bg-main {
+    background-color: var(--color-main);
+  }
+  .bg-hover {
+    background-color: var(--color-hover);
+  }
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+  .border-secondary {
+    border-color: var(--color-secondary);
+  }
+
+  /* 폰트 */
+  .font-pretendard {
+    font-family: 'Pretendard', sans-serif;
+  }
+
+  /* 텍스트 사이즈 */
+  .text-text-small {
+    font-size: 14px;
+    line-height: 1.43;
+    letter-spacing: -0.01em;
+  }
+  .text-text-base {
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+  .text-text-large {
+    font-size: 19px;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  /* 버튼 패딩 */
+  .px-btn-px {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .py-btn-py {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .px-btn-x {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .py-btn-y {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
