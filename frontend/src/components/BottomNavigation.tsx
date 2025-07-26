@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { CustomedNavBar } from "../styles/bottomNavigation"
-import homeIcon from "../assets/Home.svg"
+import homeIcon from "../assets/icons/Home.svg"
 
 function BottomNavigation() {
     return (
