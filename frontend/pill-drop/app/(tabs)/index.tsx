@@ -1,14 +1,64 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
-import { Pressable, ScrollView, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, Pressable, ScrollView, StyleSheet } from 'react-native';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
+  const [points, setPoints] = useState(1250);
+  const [completedStamps, setCompletedStamps] = useState(3);
+  const [canCertify, setCanCertify] = useState(true);
+
   const handleLocationSearch = () => {
-    router.push('/map');
+    router.push('/(tabs)/explore');
+  };
+
+  const handleMedicineDisposal = () => {
+    router.push('/medicine-disposal');
+  };
+
+  const handlePointStore = () => {
+    router.push('/point-store');
+  };
+
+  const handleCertification = () => {
+    if (!canCertify) {
+      Alert.alert('인증 불가', '오늘은 이미 인증을 완료했습니다.\n내일 다시 시도해주세요.');
+      return;
+    }
+
+    // 스탬프 인증 로직
+    const newStamps = completedStamps + 1;
+    const earnedPoints = 50; // 인증당 50 포인트
+
+    setCompletedStamps(newStamps);
+    setPoints(prev => prev + earnedPoints);
+    setCanCertify(false);
+
+    if (newStamps === 10) {
+      Alert.alert(
+        '축하합니다! 🎉', 
+        `스탬프 10개를 모두 모았습니다!\n보너스 200 포인트를 받았습니다!`,
+        [
+          {
+            text: '확인',
+            onPress: () => {
+              setPoints(prev => prev + 200);
+              setCompletedStamps(0); // 스탬프 초기화
+              setCanCertify(true);
+            }
+          }
+        ]
+      );
+    } else {
+      Alert.alert(
+        '인증 완료! ✅',
+        `폐의약품 수거함 인증이 완료되었습니다.\n+${earnedPoints} 포인트를 획득했습니다!`
+      );
+    }
   };
 
   return (
@@ -24,7 +74,7 @@ export default function HomeScreen() {
             <ThemedText style={styles.appName}>버려요약</ThemedText>
           </ThemedView>
           <ThemedView style={styles.pointSection}>
-            <ThemedText style={styles.pointValue}>P 1,250</ThemedText>
+            <ThemedText style={styles.pointValue}>P {points.toLocaleString()}</ThemedText>
           </ThemedView>
         </ThemedView>
       }>
@@ -34,22 +84,52 @@ export default function HomeScreen() {
           <ThemedText style={styles.locationButtonText}>위치 찾기</ThemedText>
         </Pressable>
       </ThemedView>
+      
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">주요 서비스</ThemedText>
+        <ThemedView style={styles.actionButtonsContainer}>
+          <Pressable onPress={handleMedicineDisposal} style={styles.actionButton}>
+            <ThemedText style={styles.actionButtonText}>폐의약품 분리배출</ThemedText>
+          </Pressable>
+          <Pressable onPress={handlePointStore} style={styles.actionButton}>
+            <ThemedText style={styles.actionButtonText}>포인트 상점</ThemedText>
+          </Pressable>
+        </ThemedView>
+      </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">약템프를 찍어보자</ThemedText>
         <ThemedText style={styles.stampProgress}>
-          인증은 하루 한 번만 참여 할 수 있어요.
+          {canCertify ? '오늘 인증이 가능합니다!' : '인증은 하루 한 번만 참여 할 수 있어요.'}
         </ThemedText>
         <ThemedView style={styles.stampGrid}>
           {Array.from({ length: 10 }, (_, index) => (
-            <ThemedView key={index} style={styles.stampSlot}>
+            <ThemedView 
+              key={index} 
+              style={[
+                styles.stampSlot,
+                index < completedStamps && styles.completedStamp
+              ]}
+            >
               <ThemedText style={styles.stampNumber}>{index + 1}</ThemedText>
-              {index < 3 && (
+              {index < completedStamps && (
                 <ThemedText style={styles.stampIcon}>✓</ThemedText>
               )}
             </ThemedView>
           ))}
-          <Pressable style={styles.certificationButton}>
-            <ThemedText style={styles.certificationButtonText}>폐의약품 수거함 인증</ThemedText>
+          <Pressable 
+            style={[
+              styles.certificationButton,
+              !canCertify && styles.disabledButton
+            ]}
+            onPress={handleCertification}
+            disabled={!canCertify}
+          >
+            <ThemedText style={[
+              styles.certificationButtonText,
+              !canCertify && styles.disabledButtonText
+            ]}>
+              {canCertify ? '폐의약품 수거함 인증' : '오늘 인증 완료'}
+            </ThemedText>
           </Pressable>
         </ThemedView>
       </ThemedView>
@@ -170,6 +250,23 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '600',
   },
+  actionButtonsContainer: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  actionButton: {
+    backgroundColor: '#35C8BA',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 8,
+    flex: 1,
+    alignItems: 'center',
+  },
+  actionButtonText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 14,
+  },
   certificationButton: {
     backgroundColor: '#35C8BA',
     paddingHorizontal: 16,
@@ -184,6 +281,16 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '600',
     fontSize: 16,
+  },
+  completedStamp: {
+    backgroundColor: '#35C8BA',
+    borderColor: '#35C8BA',
+  },
+  disabledButton: {
+    backgroundColor: '#CCCCCC',
+  },
+  disabledButtonText: {
+    color: '#666666',
   },
   horizontalScroll: {
     height: 150,
