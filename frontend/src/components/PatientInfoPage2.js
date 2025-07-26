@@ -18,11 +18,13 @@ const PatientInfoPage2 = ({ onNext }) => {
       id: 'cancer_type',
       title: '어떤 암 진단 받으셨나요?',
       options: [
-        { value: 'lung', label: '폐암', icon: '🫁' },
-        { value: 'stomach', label: '위암', icon: '🫃' },
-        { value: 'liver', label: '간암', icon: '🫀' },
-        { value: 'breast', label: '유방암', icon: '🎀' },
+        { value: 'thyroid', label: '갑상선암', icon: '🦋' },
         { value: 'colon', label: '대장암', icon: '🩺' },
+        { value: 'lung', label: '폐암', icon: '🫁' },
+        { value: 'breast', label: '유방암', icon: '🎀' },
+        { value: 'stomach', label: '위암', icon: '🫃' },
+        { value: 'prostate', label: '전립선암', icon: '♂️' },
+        { value: 'liver', label: '간암', icon: '🫀' },
         { value: 'other', label: '기타', icon: '📋' }
       ],
       showIf: (answers) => answers.cancer_diagnosis === 'yes'
