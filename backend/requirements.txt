@@ -9,3 +9,4 @@ bcrypt==4.0.1
 requests==2.31.0
 gunicorn==20.1.0
 dotenv
+Flask_SQLAlchemy
