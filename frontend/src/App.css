@@ -1,0 +1,369 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+}
+
+.welcome-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 40px 20px;
+  text-align: center;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+}
+
+.app-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.app-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 60px;
+  line-height: 1.5;
+}
+
+.feature-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 80px;
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  background-color: #e9ecef;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #666;
+}
+
+.google-login-btn {
+  width: 100%;
+  padding: 16px 24px;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.google-login-btn:hover {
+  background-color: #f8f9fa;
+  border-color: #d0d0d0;
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, #4285f4, #34a853, #fbbc05, #ea4335);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+/* P
+atient Info Page Styles */
+.patient-info-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.progress-step {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #e9ecef;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.progress-step.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.progress-line {
+  width: 40px;
+  height: 2px;
+  background-color: #e9ecef;
+  margin: 0 8px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.selection-section {
+  margin-bottom: 32px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.option-group {
+  display: flex;
+  gap: 12px;
+}
+
+.option-btn {
+  flex: 1;
+  padding: 20px 16px;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  color: #666;
+}
+
+.option-btn:hover {
+  border-color: #007bff;
+  background-color: #f8f9ff;
+}
+
+.option-btn.selected {
+  border-color: #007bff;
+  background-color: #007bff;
+  color: white;
+}
+
+.option-icon {
+  font-size: 32px;
+  margin-bottom: 4px;
+}
+
+.next-btn {
+  width: 100%;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 40px;
+}
+
+.next-btn.enabled {
+  background-color: #007bff;
+  color: white;
+}
+
+.next-btn.enabled:hover {
+  background-color: #0056b3;
+}
+
+.next-btn.disabled {
+  background-color: #e9ecef;
+  color: #adb5bd;
+  cursor: not-allowed;
+}
+
+/* Phone Login Styles */
+.login-section {
+  width: 100%;
+}
+
+.phone-login {
+  margin-bottom: 20px;
+}
+
+.phone-input {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 16px;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.phone-input:focus {
+  border-color: #007bff;
+}
+
+.phone-input::placeholder {
+  color: #adb5bd;
+}
+
+.phone-login-btn {
+  width: 100%;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.phone-login-btn.enabled {
+  background-color: #007bff;
+  color: white;
+}
+
+.phone-login-btn.enabled:hover {
+  background-color: #0056b3;
+}
+
+.phone-login-btn.disabled {
+  background-color: #e9ecef;
+  color: #adb5bd;
+  cursor: not-allowed;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: #e0e0e0;
+}
+
+.divider span {
+  padding: 0 16px;
+}
+
+.google-login-btn {
+  margin-top: 0;
+}
+/*
+ Patient Info Page 2 Styles */
+.progress-step.completed {
+  background-color: #28a745;
+  color: white;
+}
+
+.progress-line.completed {
+  background-color: #28a745;
+}
+
+.question-section {
+  margin-bottom: 32px;
+}
+
+.pass-auth-section {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.pass-auth-btn {
+  width: 100%;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pass-auth-btn:hover {
+  background: linear-gradient(135deg, #0056b3, #004085);
+  transform: translateY(-1px);
+}
+
+.auth-icon {
+  font-size: 20px;
+}
+
+.auth-success {
+  padding: 20px;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 12px;
+  color: #155724;
+}
+
+.success-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.auth-success p {
+  margin: 0;
+  font-weight: 500;
+}
