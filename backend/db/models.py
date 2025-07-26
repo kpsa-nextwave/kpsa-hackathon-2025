@@ -30,7 +30,6 @@ class User(Base):
     name = db.Column(db.String(100))
     gender = db.Column(db.String(100))
     dob = db.Column(db.DateTime)
-    residence = db.Column(db.String(150))
     occupation = db.Column(db.String(150))
     work_style = db.Column(db.String(150))
 
