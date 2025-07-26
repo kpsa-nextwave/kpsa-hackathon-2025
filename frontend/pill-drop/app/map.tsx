@@ -1,15 +1,62 @@
-import Constants from 'expo-constants';
-import { router } from 'expo-router';
-import { Pressable, StyleSheet } from 'react-native';
-import { WebView } from 'react-native-webview';
+import React, { useState } from "react";
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { WebView } from "react-native-webview";
+import { useNavigation } from "@react-navigation/native"; // 추가
 
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const BUTTONS = [
+  { label: "약국", keyword: "약국" },
+  { label: "우체통", keyword: "우체국" },
+  { label: "공공기관", keyword: "공공기관" },
+  { label: "어린이집", keyword: "어린이집" },
+];
 
-export default function MapScreen() {
-  const handleGoBack = () => {
-    router.back();
-  };
+export default function KakaoMapScreen() {
+  const navigation = useNavigation(); // 네비게이션 객체 가져오기
+
+  React.useEffect(() => {
+    navigation.setOptions({
+      title: "내 주변 폐의약품 수거함", // 헤더 제목 변경
+    });
+  }, [navigation]);
+
+  const [selected, setSelected] = useState(0);
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <style>
+        html, body, #map {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+      </style>
+      <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=98aa55cc0691e15498051fef4f56cd0a&libraries=services&autoload=false"></script>
+    </head>
+    <body>
+      <div id="map"></div>
+      <script>
+        kakao.maps.load(function () {
+          var container = document.getElementById('map');
+          var options = {
+            center: new kakao.maps.LatLng(37.364049, 126.718033),
+            level: 3
+          };
+          var map = new kakao.maps.Map(container, options);
+
+          // 기본 마커
+          var marker = new kakao.maps.Marker({
+            position: new kakao.maps.LatLng(37.364049, 126.718033),
+            map: map
+          });
+        });
+      </script>
+    </body>
+    </html>
+  `;
 
   // 네이버 지도 웹 버전 HTML
   const naverMapHTML = `
@@ -82,124 +129,83 @@ export default function MapScreen() {
   `;
 
   return (
-    <ThemedView style={styles.container}>
-      <ThemedView style={styles.header}>
-        <Pressable onPress={handleGoBack} style={styles.backButton}>
-          <ThemedText style={styles.backButtonText}>← 뒤로</ThemedText>
-        </Pressable>
-        <ThemedText style={styles.title}>폐의약품 수거함 위치</ThemedText>
-      </ThemedView>
-      
-      <ThemedView style={styles.mapContainer}>
-        <WebView
-          source={{ html: naverMapHTML }}
-          style={styles.map}
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
-          startInLoadingState={true}
-          onError={(syntheticEvent) => {
-            const { nativeEvent } = syntheticEvent;
-            console.warn('WebView error: ', nativeEvent);
-          }}
-        />
-      </ThemedView>
-      
-      <ThemedView style={styles.locationList}>
-        <ThemedText style={styles.listTitle}>가까운 수거함</ThemedText>
-        
-        <ThemedView style={styles.locationItem}>
-          <ThemedText style={styles.locationName}>서울대학교병원</ThemedText>
-          <ThemedText style={styles.locationDistance}>0.5km</ThemedText>
-          <ThemedText style={styles.locationAddress}>서울특별시 종로구 대학로 101</ThemedText>
-        </ThemedView>
-        
-        <ThemedView style={styles.locationItem}>
-          <ThemedText style={styles.locationName}>종로구 보건소</ThemedText>
-          <ThemedText style={styles.locationDistance}>1.2km</ThemedText>
-          <ThemedText style={styles.locationAddress}>서울특별시 종로구 종로 1-1</ThemedText>
-        </ThemedView>
-        
-        <ThemedView style={styles.locationItem}>
-          <ThemedText style={styles.locationName}>마이약국</ThemedText>
-          <ThemedText style={styles.locationDistance}>1.8km</ThemedText>
-          <ThemedText style={styles.locationAddress}>서울특별시 종로구 세종로 1-1</ThemedText>
-        </ThemedView>
-      </ThemedView>
-    </ThemedView>
+    <View style={{ flex: 1 }}>
+      {/* 지도 WebView */}
+      <WebView
+        originWhitelist={["*"]}
+        source={{ html }}
+        javaScriptEnabled
+        domStorageEnabled
+        style={{ flex: 1 }}
+        onError={(e) => console.log("WebView error:", e.nativeEvent)}
+        onHttpError={(e) => console.log("HTTP error:", e.nativeEvent)}
+      />
+      {/* 상단 버튼 영역 - 지도 위에 오버레이로 배치 */}
+      <View style={styles.buttonOverlay}>
+        <View style={styles.buttonContainer}>
+          {BUTTONS.map((btn, idx) => (
+            <TouchableOpacity
+              key={btn.label}
+              style={[styles.button, selected === idx && styles.buttonSelected]}
+              onPress={() => setSelected(idx)}
+              activeOpacity={0.8}
+            >
+              <Text
+                style={[
+                  styles.buttonText,
+                  selected === idx && styles.buttonTextSelected,
+                ]}
+              >
+                {btn.label}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f8f9fa',
+  buttonOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    paddingTop: 18, // 상태바/헤더 고려
+    zIndex: 10,
+    backgroundColor: "transparent",
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 60,
-    paddingBottom: 20,
-    backgroundColor: 'white',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    backgroundColor: "transparent",
+    gap: 8,
   },
-  backButton: {
-    marginRight: 16,
-  },
-  backButtonText: {
-    fontSize: 16,
-    color: '#007AFF',
-    fontWeight: '600',
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-  },
-  mapContainer: {
-    flex: 1,
-    margin: 20,
-    borderRadius: 12,
-    overflow: 'hidden',
+  button: {
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 7,
+    marginRight: 8,
     borderWidth: 1,
-    borderColor: '#d0e8f0',
+    borderColor: "#ddd",
+    elevation: 2,
   },
-  map: {
-    flex: 1,
+  buttonSelected: {
+    backgroundColor: "#fff",
+    borderColor: "#444",
+    elevation: 4,
   },
-  locationList: {
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+  buttonText: {
+    color: "#444",
+    fontWeight: "bold",
+    fontSize: 15,
   },
-  listTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 12,
-    color: '#2c3e50',
-  },
-  locationItem: {
-    backgroundColor: 'white',
-    padding: 16,
-    borderRadius: 8,
-    marginBottom: 8,
-    borderWidth: 1,
-    borderColor: '#e0e0e0',
-  },
-  locationName: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#2c3e50',
-    marginBottom: 4,
-  },
-  locationDistance: {
-    fontSize: 14,
-    color: '#007AFF',
-    fontWeight: '600',
-    marginBottom: 4,
-  },
-  locationAddress: {
-    fontSize: 12,
-    color: '#5a6c7d',
+  buttonTextSelected: {
+    color: "#444",
   },
 });
