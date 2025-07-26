@@ -101,36 +101,57 @@ export default function HomeScreen() {
         <ThemedText style={styles.stampProgress}>
           {canCertify ? '오늘 인증이 가능합니다!' : '인증은 하루 한 번만 참여 할 수 있어요.'}
         </ThemedText>
-        <ThemedView style={styles.stampGrid}>
-          {Array.from({ length: 10 }, (_, index) => (
-            <ThemedView 
-              key={index} 
-              style={[
-                styles.stampSlot,
-                index < completedStamps && styles.completedStamp
-              ]}
-            >
-              <ThemedText style={styles.stampNumber}>{index + 1}</ThemedText>
-              {index < completedStamps && (
-                <ThemedText style={styles.stampIcon}>✓</ThemedText>
-              )}
+        <ThemedView style={styles.stampContainer}>
+          <ThemedView style={styles.stampHeader}>
+            <ThemedView style={styles.stampTitleSection}>
+              <ThemedView style={styles.progressContainer}>
+                <ThemedText style={styles.progressText}>{completedStamps}/10</ThemedText>
+                <ThemedView style={styles.progressBar}>
+                  <ThemedView 
+                    style={[
+                      styles.progressFill,
+                      { width: `${(completedStamps / 10) * 100}%` }
+                    ]} 
+                  />
+                </ThemedView>
+              </ThemedView>
             </ThemedView>
-          ))}
-          <Pressable 
-            style={[
-              styles.certificationButton,
-              !canCertify && styles.disabledButton
-            ]}
-            onPress={handleCertification}
-            disabled={!canCertify}
-          >
-            <ThemedText style={[
-              styles.certificationButtonText,
-              !canCertify && styles.disabledButtonText
-            ]}>
-              {canCertify ? '폐의약품 수거함 인증' : '오늘 인증 완료'}
-            </ThemedText>
-          </Pressable>
+            <ThemedView style={styles.pointDisplay}>
+              <ThemedText style={styles.pointLabel}>보유 포인트</ThemedText>
+              <ThemedText style={styles.pointAmount}>P {points.toLocaleString()}</ThemedText>
+            </ThemedView>
+          </ThemedView>
+          <ThemedView style={styles.stampGrid}>
+            {Array.from({ length: 10 }, (_, index) => (
+              <ThemedView 
+                key={index} 
+                style={[
+                  styles.stampSlot,
+                  index < completedStamps && styles.completedStamp
+                ]}
+              >
+                <ThemedText style={styles.stampNumber}>{index + 1}</ThemedText>
+                {index < completedStamps && (
+                  <ThemedText style={styles.stampIcon}>✓</ThemedText>
+                )}
+              </ThemedView>
+            ))}
+            <Pressable 
+              style={[
+                styles.certificationButton,
+                !canCertify && styles.disabledButton
+              ]}
+              onPress={handleCertification}
+              disabled={!canCertify}
+            >
+              <ThemedText style={[
+                styles.certificationButtonText,
+                !canCertify && styles.disabledButtonText
+              ]}>
+                {canCertify ? '폐의약품 수거함 인증' : '오늘 인증 완료'}
+              </ThemedText>
+            </Pressable>
+          </ThemedView>
         </ThemedView>
       </ThemedView>
       <ThemedView style={styles.lastStepContainer}>
@@ -267,6 +288,69 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 14,
   },
+  stampContainer: {
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 20,
+    marginHorizontal: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  stampHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+  },
+  stampTitleSection: {
+    flex: 1,
+  },
+  progressContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+    gap: 10,
+  },
+  progressText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#35C8BA',
+    minWidth: 40,
+  },
+  progressBar: {
+    flex: 1,
+    height: 8,
+    backgroundColor: '#E0E0E0',
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: '#35C8BA',
+    borderRadius: 4,
+  },
+  pointDisplay: {
+    alignItems: 'flex-end',
+    backgroundColor: '#F8F9FA',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  pointLabel: {
+    fontSize: 12,
+    color: '#666666',
+    marginBottom: 2,
+  },
+  pointAmount: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#35C8BA',
+  },
   certificationButton: {
     backgroundColor: '#35C8BA',
     paddingHorizontal: 16,
@@ -331,8 +415,8 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   stampSlot: {
-    width: 48,
-    height: 48,
+    width: 40,
+    height: 40,
     borderRadius: 30,
     borderWidth: 2,
     borderColor: '#e0e0e0',
