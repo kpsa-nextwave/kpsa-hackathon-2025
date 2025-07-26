@@ -65,10 +65,14 @@ const PatientInfoPage2 = ({ onNext }) => {
   };
 
   const handleNext = () => {
-    console.log('All answers:', answers);
-    console.log('PASS authenticated:', passAuthenticated);
+    const data = {
+      cancerDiagnosis: answers.cancer_diagnosis,
+      cancerType: answers.cancer_type,
+      passAuthenticated
+    };
+    console.log('Page 2 data:', data);
     if (onNext) {
-      onNext();
+      onNext(data);
     }
   };
 

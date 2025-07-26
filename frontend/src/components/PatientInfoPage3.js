@@ -92,7 +92,7 @@ const PatientInfoPage3 = ({ onNext }) => {
     };
     console.log('Page 3 data:', data);
     if (onNext) {
-      onNext();
+      onNext(data);
     }
   };
 

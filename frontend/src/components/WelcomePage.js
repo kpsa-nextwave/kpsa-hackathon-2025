@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { userAPI } from '../services/api';
 
-const WelcomePage = ({ onLogin }) => {
+const WelcomePage = ({ onLogin, onExistingUser }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     // Google Sign-In 초기화
     if (window.google) {
@@ -29,12 +31,36 @@ const WelcomePage = ({ onLogin }) => {
     }
   };
 
-  const handlePhoneLogin = () => {
-    if (phoneNumber.length >= 10) {
-      console.log('Phone Login:', phoneNumber);
-      onLogin();
-    } else {
+  const handlePhoneLogin = async () => {
+    if (phoneNumber.length < 13) {
       alert('올바른 전화번호를 입력해주세요.');
+      return;
+    }
+
+    setIsLoading(true);
+    
+    try {
+      // 핸드폰 번호로 사용자 조회
+      const cleanPhoneNumber = phoneNumber.replace(/[^\d]/g, '');
+      const response = await userAPI.checkUserByPhone(cleanPhoneNumber);
+      
+      if (response.exists) {
+        // 기존 사용자인 경우 메인 페이지로 이동
+        console.log('Existing user found:', response.user);
+        onExistingUser(response.user);
+      } else {
+        // 새 사용자인 경우 환자 정보 입력 페이지로 이동
+        console.log('New user, proceeding to patient info');
+        onLogin(cleanPhoneNumber);
+      }
+    } catch (error) {
+      console.error('Phone login error:', error);
+      // 에러 발생 시 개발용으로 환자 정보 페이지로 이동
+      alert('서버 연결에 문제가 있습니다. 다시 시도해주세요.');
+      // 개발용 임시 처리
+      onLogin(phoneNumber.replace(/[^\d]/g, ''));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -84,11 +110,11 @@ const WelcomePage = ({ onLogin }) => {
             maxLength="13"
           />
           <button
-            className={`phone-login-btn ${phoneNumber.length >= 13 ? 'enabled' : 'disabled'}`}
+            className={`phone-login-btn ${phoneNumber.length >= 13 && !isLoading ? 'enabled' : 'disabled'}`}
             onClick={handlePhoneLogin}
-            disabled={phoneNumber.length < 13}
+            disabled={phoneNumber.length < 13 || isLoading}
           >
-            전화번호로 시작하기
+            {isLoading ? '확인 중...' : '전화번호로 시작하기'}
           </button>
         </div>
 

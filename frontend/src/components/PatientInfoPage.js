@@ -6,9 +6,10 @@ const PatientInfoPage = ({ onNext }) => {
 
   const handleNext = () => {
     if (nationality && gender) {
-      console.log('Selected:', { nationality, gender });
+      const data = { nationality, gender };
+      console.log('Page 1 data:', data);
       if (onNext) {
-        onNext();
+        onNext(data);
       }
     } else {
       alert('국적과 성별을 모두 선택해주세요.');
