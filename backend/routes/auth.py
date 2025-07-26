@@ -3,7 +3,7 @@ from utils.security import generate_jwt, token_required
 from sqlalchemy import select
 from db.models import db, Account, User
 from datetime import datetime
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
@@ -49,3 +49,24 @@ def signup():
     except Exception as e:
         db.session.rollback()
         return jsonify({"message": "Signup failed", "error": str(e)}), 500
+    
+
+@auth_bp.route("/login", methods=["POST"])
+def login():
+    email = request.json.get("email")
+    password = request.json.get("password")
+    
+    if not email or not password:
+        return jsonify({"message": "Email and password are required"}), 400
+    
+    try:
+        account = db.session.query(Account).filter_by(email=email).first()
+        if account and check_password_hash(account.password_hash, password):
+            token = generate_jwt({"email": email, "user_id": account.id})
+            res = make_response(jsonify({"message": "Login successful"}))
+            res.set_cookie("jwt", token, httponly=True, samesite="Lax", secure=False)
+            return res
+        else:
+            return jsonify({"message": "Invalid credentials"}), 401
+    except Exception as e:
+        return jsonify({"message": "DB request failed", "error": str(e)}), 500
