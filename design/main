@@ -1,0 +1,390 @@
+import {useStyles, createStyleSheet} from 'react-native-unistyles';
+import {View, Text} from 'react-native';
+import {Image} from 'react-exo/image';
+import PageMove from 'assets/svg/pagemove.svg';
+import bottomBoxIcon from 'assets/img/bottomboxicon.png';
+import bottomHomeIcon from 'assets/img/bottomhomeicon.png';
+import bottomMoreIcon from 'assets/img/bottommoreicon.png';
+import navigateSvg from 'assets/img/navigatesvg.png';
+import stamp from 'assets/img/stamp.png';
+import stamp10 from 'assets/img/stamp10.png';
+import stamp2 from 'assets/img/stamp2.png';
+import stamp3 from 'assets/img/stamp3.png';
+import stamp4 from 'assets/img/stamp4.png';
+import stamp5 from 'assets/img/stamp5.png';
+import stamp6 from 'assets/img/stamp6.png';
+import stamp7 from 'assets/img/stamp7.png';
+import stamp8 from 'assets/img/stamp8.png';
+import stamp9 from 'assets/img/stamp9.png';
+import storeSvg from 'assets/img/storesvg.png';
+import trashSvg from 'assets/img/trashsvg.png';
+
+import type {ViewStyle, StyleProp} from 'react-native';
+
+export interface _____Props {
+  /** Used to override the default root style. */
+  style?: StyleProp<ViewStyle>,
+  /** Used to locate this view in end-to-end tests. */
+  testID?: string,
+}
+
+export function _____(props: _____Props) {
+  const {styles} = useStyles(stylesheet);
+
+  return (
+    <View testID={props.testID ?? "53:70"} style={[styles.root, props.style]}>
+      <View testID="15:264" style={styles.sectionBackground}/>
+      <Text testID="0:189" style={styles.______________}>
+        {`건강하게 버리고, 똑똑하게 쓰는 법`}
+      </Text>
+      <Text testID="0:190" style={styles.________}>
+        {`약탬프를 찍어보자!`}
+      </Text>
+      <Text testID="0:191" style={styles.____}>
+        {`버려요약`}
+      </Text>
+      <View testID="0:192" style={styles.navigateBtn}/>
+      <View testID="0:193" style={styles.stampBackground}/>
+      <Text testID="0:194" style={styles.__________}>
+        {`내 주변
+폐의약품 수거함`}
+      </Text>
+      <Text testID="0:195" style={styles.____2}>
+        {`위치 찾기 >`}
+      </Text>
+      <Text testID="0:196" style={styles.$110}>
+        {`1/10`}
+      </Text>
+      <Image url={navigateSvg} width={81} height={81}/>
+      <View testID="0:198" style={styles.simbol}/>
+      <PageMove/>
+      <View testID="0:200" style={styles.pointBackground}/>
+      <Text testID="0:201" style={styles.p1030}>
+        {`P 1,030`}
+      </Text>
+      <Image url={stamp} width={40} height={41}/>
+      <Image url={stamp2} width={40} height={41}/>
+      <Image url={stamp3} width={40} height={41}/>
+      <Image url={stamp4} width={41} height={41}/>
+      <Image url={stamp5} width={40} height={41}/>
+      <Image url={stamp6} width={40} height={41}/>
+      <Image url={stamp7} width={40} height={41}/>
+      <Image url={stamp8} width={41} height={41}/>
+      <Image url={stamp9} width={40} height={41}/>
+      <Image url={stamp10} width={40} height={41}/>
+      <View testID="0:212" style={styles.photoBtn}/>
+      <Text testID="0:213" style={styles._________}>
+        {` 폐의약품 수거함 인증`}
+      </Text>
+      <View testID="0:214" style={styles.trashBtn}/>
+      <Text testID="0:215" style={styles.________2}>
+        {`폐의약품
+분리 배출`}
+      </Text>
+      <View testID="0:216" style={styles.storeBtn}/>
+      <Text testID="0:217" style={styles._____}>
+        {`포인트 상점`}
+      </Text>
+      <Text testID="0:218" style={styles._______________}>
+        {`※인증은 하루 한 번만 참여할 수 있어요`}
+      </Text>
+      <Image url={trashSvg} width={55} height={55}/>
+      <Image url={storeSvg} width={55} height={55}/>
+      <View testID="0:221" style={styles.cardNews}/>
+      <View testID="0:222" style={styles.cardNews2}/>
+      <View testID="0:223" style={styles.bottomNav}/>
+      <Image url={bottomHomeIcon} width={34} height={35}/>
+      <Image url={bottomBoxIcon} width={35} height={35}/>
+      <Image url={bottomMoreIcon} width={34} height={35}/>
+      <Text testID="0:227" style={styles.___}>
+        {`더보기`}
+      </Text>
+      <Text testID="0:228" style={styles._}>
+        {`홈`}
+      </Text>
+      <Text testID="0:229" style={styles.___2}>
+        {`수거함`}
+      </Text>
+      <Text testID="0:230" style={styles.____________5____}>
+        {`생분해 비닐 사용 시 환경오염 5% 감소 효과!`}
+      </Text>
+      <Text testID="0:232" style={styles.$04}>
+        {`04`}
+      </Text>
+      <Text testID="15:279" style={styles.____________5____2}>
+        {`생분해 비닐 사용 시 환경오염 5% 감소 효과!`}
+      </Text>
+      <Text testID="15:280" style={styles.$042}>
+        {`04`}
+      </Text>
+    </View>
+  );
+}
+
+const stylesheet = createStyleSheet(theme => ({
+  root: {
+    width: 360,
+    height: 1079,
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+  },
+  sectionBackground: {
+    width: 360,
+    height: 666,
+    flexShrink: 0,
+    backgroundColor: 'rgba(238, 238, 238, 1)',
+  },
+  ______________: {
+    color: 'rgba(0, 0, 0, 1)',
+    fontFamily: 'Inter',
+    fontSize: 18,
+    fontStyle: 'normal',
+    fontWeight: '600',
+    lineHeight: 30,
+  },
+  ________: {
+    color: 'rgba(0, 0, 0, 1)',
+    fontFamily: 'Inter',
+    fontSize: 18,
+    fontStyle: 'normal',
+    fontWeight: '600',
+    lineHeight: 30,
+  },
+  ____: {
+    color: 'rgba(0, 0, 0, 1)',
+    fontFamily: 'Inter',
+    fontSize: 20,
+    fontStyle: 'normal',
+    fontWeight: '800',
+  },
+  navigateBtn: {
+    width: 304,
+    height: 145,
+    flexShrink: 0,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'rgba(204, 204, 204, 1)',
+  },
+  stampBackground: {
+    width: 304,
+    height: 231,
+    flexShrink: 0,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'rgba(204, 204, 204, 1)',
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+  },
+  __________: {
+    color: 'rgba(0, 0, 0, 1)',
+    fontFamily: 'Inter',
+    fontSize: 18,
+    fontStyle: 'normal',
+    fontWeight: '600',
+    lineHeight: 25,
+  },
+  ____2: {
+    color: 'rgba(0, 0, 0, 1)',
+    fontFamily: 'Inter',
+    fontSize: 12,
+    fontStyle: 'normal',
+    fontWeight: '500',
+  },
+  $110: {
+    color: 'rgba(0, 0, 0, 1)',
+    fontFamily: 'Inter',
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '500',
+    letterSpacing: 0.8,
+  },
+  simbol: {
+    width: 37,
+    height: 37,
+    flexShrink: 0,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: 'rgba(217, 217, 217, 1)',
+  },
+  pointBackground: {
+    width: 78,
+    height: 32,
+    flexShrink: 0,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: 'rgba(107, 107, 107, 1)',
+  },
+  p1030: {
+    color: 'rgba(255, 255, 255, 1)',
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontStyle: 'normal',
+    fontWeight: '500',
+    lineHeight: 22,
+  },
+  photoBtn: {
+    width: 253,
+    height: 44,
+    flexShrink: 0,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: 'rgba(53, 200, 186, 1)',
+  },
+  _________: {
+    width: 185,
+    color: 'rgba(255, 255, 255, 1)',
+    textAlign: 'center',
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontStyle: 'normal',
+    fontWeight: '600',
+    lineHeight: 21,
+  },
+  trashBtn: {
+    width: 145,
+    height: 145,
+    flexShrink: 0,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: 'rgba(162, 223, 217, 1)',
+  },
+  ________2: {
+    color: 'rgba(255, 255, 255, 1)',
+    fontFamily: 'Inter',
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '600',
+    lineHeight: 21,
+  },
+  storeBtn: {
+    width: 145,
+    height: 145,
+    flexShrink: 0,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: 'rgba(162, 223, 217, 1)',
+  },
+  _____: {
+    color: 'rgba(255, 255, 255, 1)',
+    fontFamily: 'Inter',
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '600',
+    lineHeight: 21,
+  },
+  _______________: {
+    color: 'rgba(156, 156, 156, 1)',
+    fontFamily: 'Inter',
+    fontSize: 12,
+    fontStyle: 'normal',
+    fontWeight: '500',
+    lineHeight: 22,
+  },
+  cardNews: {
+    width: 266,
+    height: 153,
+    flexShrink: 0,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: 'rgba(125, 125, 125, 1)',
+  },
+  cardNews2: {
+    width: 266,
+    height: 153,
+    flexShrink: 0,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: 'rgba(125, 125, 125, 1)',
+  },
+  bottomNav: {
+    width: 372,
+    height: 90,
+    flexShrink: 0,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'rgba(216, 216, 216, 1)',
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+  },
+  ___: {
+    width: 45,
+    color: 'rgba(150, 150, 150, 1)',
+    textAlign: 'center',
+    fontFamily: 'Inter',
+    fontSize: 12,
+    fontStyle: 'normal',
+    fontWeight: '500',
+    lineHeight: 21,
+  },
+  _: {
+    width: 16,
+    color: 'rgba(0, 0, 0, 1)',
+    textAlign: 'center',
+    fontFamily: 'Inter',
+    fontSize: 12,
+    fontStyle: 'normal',
+    fontWeight: '500',
+    lineHeight: 21,
+  },
+  ___2: {
+    width: 72,
+    color: 'rgba(150, 150, 150, 1)',
+    textAlign: 'center',
+    fontFamily: 'Inter',
+    fontSize: 12,
+    fontStyle: 'normal',
+    fontWeight: '500',
+    lineHeight: 21,
+  },
+  ____________5____: {
+    color: 'rgba(255, 255, 255, 1)',
+    fontFamily: 'Inter',
+    fontSize: 17,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    lineHeight: 22,
+  },
+  $04: {
+    color: 'rgba(53, 200, 186, 1)',
+    fontFamily: 'Inter',
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    lineHeight: 22,
+  },
+  ____________5____2: {
+    color: 'rgba(255, 255, 255, 1)',
+    fontFamily: 'Inter',
+    fontSize: 17,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    lineHeight: 22,
+  },
+  $042: {
+    color: 'rgba(53, 200, 186, 1)',
+    fontFamily: 'Inter',
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    lineHeight: 22,
+  },
+}));
